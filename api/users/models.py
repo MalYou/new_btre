@@ -47,6 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone = models.CharField(max_length=50, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_customer = models.BooleanField(default=False)
 
     objects = UserManager()
 
