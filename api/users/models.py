@@ -42,7 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     """ Custom user model that supports using email instead of username"""
 
     email = models.EmailField(max_length=250, unique=True, blank=False)
-    first_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=101)
     last_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=50, blank=True)
     is_active = models.BooleanField(default=True)

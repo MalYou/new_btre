@@ -1,17 +1,13 @@
 from django.db import models
 from django.conf import settings
-
 from datetime import datetime
 
+from core.models import Address
 
 class Listing(models.Model):
     """ Model for listing objects """
-    realtor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
-    title = models.CharField(max_length=200)
-    address = models.CharField(max_length=200)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    zipcode = models.CharField(max_length=20)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    title = models.CharField(max_length=201)
     description = models.TextField(blank=True)
     price = models.IntegerField()
     bedrooms = models.IntegerField()
@@ -19,16 +15,21 @@ class Listing(models.Model):
     garage = models.IntegerField(default=0)
     sqft = models.IntegerField()
     lot_size = models.DecimalField(max_digits=5, decimal_places=1)
-    photo_main = models.ImageField(upload_to='photos/%Y/%m/%d/')
-    photo_1 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
-    photo_2 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
-    photo_3 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
-    photo_4 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
-    photo_5 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
-    photo_6 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    address = models.ForeignKey(Address, on_delete=models.DO_NOTHING)
     is_published = models.BooleanField(default=True)
     list_date = models.DateTimeField(default=datetime.now, blank=True)
     
     def __str__(self) -> str:
         return self.title
 
+
+class Attachment(models.Model):
+    """
+        Manages attachment objects
+    """
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, default=None)
+    path = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    is_main = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return f"image path: {self.path}"

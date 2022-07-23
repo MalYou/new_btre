@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'core',
     'users',
+    'listings',
 ]
 
 MIDDLEWARE = [
@@ -155,3 +157,8 @@ SWAGGER_SETTINGS = {
       }
    }
 }
+
+# Media folder settings
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
