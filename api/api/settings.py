@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core',
     'users',
     'listings',
+    'attachments',
 ]
 
 MIDDLEWARE = [
@@ -108,6 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # JWT configuration
 
+"""
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -116,6 +118,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     )
 }
+
+"""
 
 # Authenticating user Model
 
@@ -148,6 +152,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Swagger config
 
+"""
 SWAGGER_SETTINGS = {
    'SECURITY_DEFINITIONS': {
       'Bearer': {
@@ -157,6 +162,7 @@ SWAGGER_SETTINGS = {
       }
    }
 }
+"""
 
 # Media folder settings
 

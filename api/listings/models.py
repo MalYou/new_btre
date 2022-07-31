@@ -1,11 +1,13 @@
+from datetime import datetime
+
 from django.db import models
 from django.conf import settings
-from datetime import datetime
 
 from core.models import Address
 
 class Listing(models.Model):
     """ Model for listing objects """
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
     title = models.CharField(max_length=201)
     description = models.TextField(blank=True)
@@ -20,16 +22,4 @@ class Listing(models.Model):
     list_date = models.DateTimeField(default=datetime.now, blank=True)
     
     def __str__(self) -> str:
-        return self.title
-
-
-class Attachment(models.Model):
-    """
-        Manages attachment objects
-    """
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, default=None)
-    path = models.ImageField(upload_to='photos/%Y/%m/%d/')
-    is_main = models.BooleanField(default=False)
-
-    def __str__(self) -> str:
-        return f"image path: {self.path}"
+        return str(self.pk)

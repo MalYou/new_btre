@@ -40,4 +40,5 @@ urlpatterns = [
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api/users/', include('users.urls')),
     path('api/listings/', include('listings.urls')),
+    path('api/attachments/', include('attachments.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
