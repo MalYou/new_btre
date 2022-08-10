@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'users',
     'listings',
     'attachments',
+    'contacts',
 ]
 
 MIDDLEWARE = [
