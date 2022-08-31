@@ -1,5 +1,5 @@
 from django.db.models import Prefetch
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, permissions
 
 from attachments.models import Attachment
 from .models import Listing
@@ -11,7 +11,7 @@ class ListingsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         List listings or retrieve a specific listing
     """
     serializer_class = serializers.ListingsSerializer
-    #authentication_classes = api_settings.DEFAULT_AUTHENTICATION_CLASSES
+    permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
         """
@@ -32,4 +32,4 @@ class ListingViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
     queryset = Listing.objects.all()
     serializer_class = serializers.ListingSerializer
-    #authentication_classes = api_settings.DEFAULT_AUTHENTICATION_CLASSES
+    permission_classes = [permissions.AllowAny]

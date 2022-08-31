@@ -2,5 +2,4 @@ django
 djangorestframework
 djangorestframework-simplejwt
 pillow
-drf-yasg
-drf-yasg[validation]
+drf-spectacular

@@ -15,29 +15,18 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from rest_framework import permissions
-
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
-
-schema_view = get_schema_view(
-   openapi.Info(
-      title="BTRE API",
-      default_version='v1',
-      description="API for BTRE Application",
-   ),
-   public=True,
-   permission_classes=(permissions.AllowAny,),
-)
+from drf_spectacular import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('api/schema/', views.SpectacularAPIView.as_view(), name='schema'),
+    path('api/schema/swagger-ui/', views.SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc-ui/', views.SpectacularRedocView.as_view(url_name='schema'), name='redoc-ui'),
     path('api/users/', include('users.urls')),
     path('api/listings/', include('listings.urls')),
     path('api/attachments/', include('attachments.urls')),
